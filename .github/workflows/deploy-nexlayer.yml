@@ -106,4 +106,25 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "1. **Use Nexlayer MCP tools in Cursor/Claude:**" >> $GITHUB_STEP_SUMMARY
           echo "   - Ask your AI assistant to deploy using the \`nexlayer.yaml\` file" >> $GITHUB_STEP_SUMMARY
-          echo "   - The image is ready at
+          echo "   - The image is ready at: \`${{ steps.deploy.outputs.image }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "2. **Deploy via Nexlayer dashboard:**" >> $GITHUB_STEP_SUMMARY
+          echo "   - Visit: https://nexlayer.com/dashboard" >> $GITHUB_STEP_SUMMARY
+          echo "   - Use the \`nexlayer.yaml\` file from this repository" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Output deployment info
+        run: |
+          echo "=========================================="
+          echo "🎉 Nexlayer Deployment Ready!"
+          echo "=========================================="
+          echo ""
+          echo "📦 Docker Image:"
+          echo "${{ steps.deploy.outputs.image }}"
+          echo ""
+          echo "📋 Configuration: nexlayer.yaml"
+          echo ""
+          echo "💡 Deploy using Nexlayer MCP tools or dashboard"
+          echo "=========================================="
