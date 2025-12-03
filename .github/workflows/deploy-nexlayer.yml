@@ -35,18 +35,21 @@ jobs:
       - name: Determine registry and login
         id: registry
         run: |
-          # Try Docker Hub first (more reliable for org repos), fallback to GHCR
+          # Convert GitHub actor to lowercase to satisfy Docker
+          ACTOR_LOWER=$(echo "${{ github.actor }}" | tr '[:upper:]' '[:lower:]')
+          
+          # Determine registry and image
           if [ -n "${{ secrets.DOCKERHUB_USERNAME }}" ] && [ -n "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
             echo "registry=docker.io" >> $GITHUB_OUTPUT
             echo "image=docker.io/${{ secrets.DOCKERHUB_USERNAME }}/abbottabad-wall-masterpiece:latest" >> $GITHUB_OUTPUT
             echo "Using Docker Hub"
           elif [ -n "${{ secrets.GHCR_PAT }}" ]; then
             echo "registry=ghcr.io" >> $GITHUB_OUTPUT
-            echo "image=ghcr.io/${{ github.actor }}/abbottabad-wall-masterpiece:latest" >> $GITHUB_OUTPUT
+            echo "image=ghcr.io/${ACTOR_LOWER}/abbottabad-wall-masterpiece:latest" >> $GITHUB_OUTPUT
             echo "Using GHCR with PAT"
           else
             echo "registry=ghcr.io" >> $GITHUB_OUTPUT
-            echo "image=ghcr.io/${{ github.actor }}/abbottabad-wall-masterpiece:latest" >> $GITHUB_OUTPUT
+            echo "image=ghcr.io/${ACTOR_LOWER}/abbottabad-wall-masterpiece:latest" >> $GITHUB_OUTPUT
             echo "Using GHCR (may fail for org repos - set GHCR_PAT or DOCKERHUB credentials)"
           fi
 
@@ -103,25 +106,4 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "1. **Use Nexlayer MCP tools in Cursor/Claude:**" >> $GITHUB_STEP_SUMMARY
           echo "   - Ask your AI assistant to deploy using the \`nexlayer.yaml\` file" >> $GITHUB_STEP_SUMMARY
-          echo "   - The image is ready at: \`${{ steps.deploy.outputs.image }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "2. **Deploy via Nexlayer dashboard:**" >> $GITHUB_STEP_SUMMARY
-          echo "   - Visit: https://nexlayer.com/dashboard" >> $GITHUB_STEP_SUMMARY
-          echo "   - Use the \`nexlayer.yaml\` file from this repository" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-
-      - name: Output deployment info
-        run: |
-          echo "=========================================="
-          echo "🎉 Nexlayer Deployment Ready!"
-          echo "=========================================="
-          echo ""
-          echo "📦 Docker Image:"
-          echo "${{ steps.deploy.outputs.image }}"
-          echo ""
-          echo "📋 Configuration: nexlayer.yaml"
-          echo ""
-          echo "💡 Deploy using Nexlayer MCP tools or dashboard"
-          echo "=========================================="
+          echo "   - The image is ready at
