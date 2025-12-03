@@ -80,6 +80,18 @@ This project is configured with **automatic deployment to Nexlayer** whenever yo
 - **Automatically deploy to Nexlayer** (production environment)
 - **Stay in your flow** without leaving Lovable/Replit
 
+### 🤖 AI Agent Integration
+
+This repository includes special files that enable **AI agents** (Lovable, Replit, etc.) to automatically detect and deploy to Nexlayer:
+
+- **`nexlayer-mcp.json`** - MCP tool manifest for AI integration
+- **`nexlayer.config.stub`** - Triggers automatic YAML generation
+- **`.well-known/ai-plugin.json`** - AI plugin discovery manifest
+- **`openapi.yaml`** - API specification for AI agents
+- **`.ai/context/`** - Context files for AI agents
+
+See [`AI_AGENT_GUIDE.md`](./AI_AGENT_GUIDE.md) for complete documentation on how AI agents interact with this setup.
+
 ### Setup Instructions
 
 #### 1. Configure GitHub Secrets
