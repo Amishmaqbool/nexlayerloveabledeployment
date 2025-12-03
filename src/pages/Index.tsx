@@ -1,14 +1,55 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Helmet } from 'react-helmet-async';
+import Navbar from '@/components/Navbar';
+import HeroSection from '@/components/HeroSection';
+import ServicesSection from '@/components/ServicesSection';
+import BeforeAfterSection from '@/components/BeforeAfterSection';
+import PortfolioSection from '@/components/PortfolioSection';
+import ProcessSection from '@/components/ProcessSection';
+import PricingSection from '@/components/PricingSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
+import ContactSection from '@/components/ContactSection';
+import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import Preloader from '@/components/Preloader';
 
-const Index = () => {
+export default function Index() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
-};
+    <>
+      <Helmet>
+        <title>Abbottabad Wall Art | Portable UV Wall Printing Pakistan | 3D Murals & Truck Art</title>
+        <meta
+          name="description"
+          content="Transform any wall into stunning art with Abbottabad Wall Art. Portable UV wall printing, 3D murals, Pakistani truck art, wedding backdrops. Serving KPK & Islamabad. Starting ₹25,000."
+        />
+        <meta
+          name="keywords"
+          content="wall printer Abbottabad, 3D wall printing Pakistan, truck art mural, UV wall printing, wedding backdrop printing, café wall art, Islamic calligraphy wall, eagle mural Pakistan"
+        />
+        <meta property="og:title" content="Abbottabad Wall Art | Transform Any Wall Into Art" />
+        <meta
+          property="og:description"
+          content="Portable UV wall printing services in Pakistan. 3D murals, truck art, wedding backdrops starting ₹25,000."
+        />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://abbottabadwallart.com" />
+      </Helmet>
 
-export default Index;
+      <Preloader />
+      <Navbar />
+      
+      <main>
+        <HeroSection />
+        <ServicesSection />
+        <BeforeAfterSection />
+        <PortfolioSection />
+        <ProcessSection />
+        <PricingSection />
+        <TestimonialsSection />
+        <ContactSection />
+      </main>
+
+      <Footer />
+      <WhatsAppButton />
+    </>
+  );
+}
