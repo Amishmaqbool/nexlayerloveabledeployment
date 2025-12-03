@@ -16,16 +16,16 @@ export default function Index() {
   return (
     <>
       <Helmet>
-        <title>Abbottabad Wall Art | Portable UV Wall Printing Pakistan | 3D Murals & Truck Art</title>
+        <title>Wall Art | Portable UV Wall Printing Pakistan | 3D Murals & Truck Art</title>
         <meta
           name="description"
-          content="Transform any wall into stunning art with Abbottabad Wall Art. Portable UV wall printing, 3D murals, Pakistani truck art, wedding backdrops. Serving KPK & Islamabad. Starting ₹25,000."
+          content="Transform any wall into stunning art with Wall Art. Portable UV wall printing, 3D murals, Pakistani truck art, wedding backdrops. Serving KPK & Islamabad. Starting ₹25,000."
         />
         <meta
           name="keywords"
           content="wall printer Abbottabad, 3D wall printing Pakistan, truck art mural, UV wall printing, wedding backdrop printing, café wall art, Islamic calligraphy wall, eagle mural Pakistan"
         />
-        <meta property="og:title" content="Abbottabad Wall Art | Transform Any Wall Into Art" />
+        <meta property="og:title" content="Wall Art | Transform Any Wall Into Art" />
         <meta
           property="og:description"
           content="Portable UV wall printing services in Pakistan. 3D murals, truck art, wedding backdrops starting ₹25,000."
