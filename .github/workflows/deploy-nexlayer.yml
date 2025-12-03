@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # Allows manual triggering
 
 jobs:
-  deploy:
+  build-and-prepare:
     runs-on: ubuntu-latest
     
     steps:
@@ -26,126 +26,71 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to NextLayer
-        id: deploy
-        env:
-          NEXLAYER_MCP_TOKEN: ${{ secrets.NEXLAYER_MCP_TOKEN }}
-          GITHUB_REPO: ${{ github.repository }}
-          GITHUB_REF: ${{ github.ref }}
-        run: |
-          echo "🚀 Deploying to NextLayer..."
-          
-          # Extract branch name from ref (e.g., refs/heads/main -> main)
-          BRANCH_NAME=$(echo "$GITHUB_REF" | sed 's/refs\/heads\///')
-          
-          # Prepare deployment payload
-          DEPLOY_PAYLOAD=$(cat <<EOF
-          {
-            "repo": "https://github.com/$GITHUB_REPO",
-            "branch": "$BRANCH_NAME",
-            "commit": "${{ github.sha }}",
-            "build_output": "dist"
-          }
-          EOF
-          )
-          
-          # Deploy to NextLayer
-          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST https://mcp.nexlayer.ai/api/mcp \
-            -H "Authorization: Bearer $NEXLAYER_MCP_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d "$DEPLOY_PAYLOAD")
-          
-          # Extract HTTP status code and body
-          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
-          BODY=$(echo "$RESPONSE" | sed '$d')
-          
-          echo "Response HTTP Code: $HTTP_CODE"
-          echo "Response Body: $BODY"
-          
-          # Try to extract deployment URL from response
-          if [ "$HTTP_CODE" -eq 200 ] || [ "$HTTP_CODE" -eq 201 ]; then
-            # Try multiple ways to extract URL from JSON response
-            DEPLOYMENT_URL=$(echo "$BODY" | grep -oE '"url":"[^"]*"' | head -1 | cut -d'"' -f4 || \
-                            echo "$BODY" | grep -oE '"deployment_url":"[^"]*"' | head -1 | cut -d'"' -f4 || \
-                            echo "$BODY" | grep -oE '"deploymentUrl":"[^"]*"' | head -1 | cut -d'"' -f4 || \
-                            echo "$BODY" | grep -oE 'https?://[^"]*\.nexlayer\.ai[^"]*' | head -1 || \
-                            echo "")
-            
-            if [ -n "$DEPLOYMENT_URL" ]; then
-              echo "✅ Deployment successful!"
-              echo "🌐 Deployment URL: $DEPLOYMENT_URL"
-              echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
-              echo "DEPLOYMENT_URL=$DEPLOYMENT_URL" >> $GITHUB_ENV
-              
-              # Store deployment URL in a file for easy retrieval
-              echo "$DEPLOYMENT_URL" > deployment-url.txt
-              echo "$DEPLOYMENT_URL" | tee deployment-url.txt
-            else
-              echo "⚠️ Deployment successful but URL not found in response"
-              echo "Response: $BODY"
-              echo "💡 Check NextLayer dashboard for deployment URL"
-            fi
-          else
-            echo "❌ Deployment failed with HTTP code: $HTTP_CODE"
-            echo "Response: $BODY"
-            exit 1
-          fi
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Store deployment URL as artifact
-        if: steps.deploy.outputs.deployment_url != ''
-        uses: actions/upload-artifact@v4
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          name: deployment-url
-          path: deployment-url.txt
-          retention-days: 90
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Store deployment URL in repository variable (via API)
-        if: steps.deploy.outputs.deployment_url != ''
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment_url }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Prepare NextLayer deployment info
+        id: deploy
         run: |
-          # Store as repository variable for easy access
-          # Note: This requires repo admin permissions
-          curl -X PUT \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/variables/NEXLAYER_DEPLOYMENT_URL" \
-            -d "{\"value\":\"$DEPLOYMENT_URL\"}" || echo "⚠️ Could not store as repository variable (may require admin permissions)"
+          IMAGE_NAME="ghcr.io/${{ github.repository }}:latest"
+          echo "🚀 Docker image built and pushed!"
+          echo "📦 Image: $IMAGE_NAME"
+          echo ""
+          echo "📋 NextLayer YAML configuration:"
+          cat nexlayer.yaml
+          echo ""
+          echo "image=$IMAGE_NAME" >> $GITHUB_OUTPUT
+          echo "deployment_ready=true" >> $GITHUB_OUTPUT
 
       - name: Create deployment summary
-        if: steps.deploy.outputs.deployment_url != ''
         run: |
-          echo "## 🚀 NextLayer Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "## 🚀 NextLayer Deployment Ready" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "✅ **Deployment successful!**" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Docker image built and pushed!**" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🌐 **Live URL:** [${{ steps.deploy.outputs.deployment_url }}](${{ steps.deploy.outputs.deployment_url }})" >> $GITHUB_STEP_SUMMARY
+          echo "📦 **Image:** \`${{ steps.deploy.outputs.image }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Next Steps:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "To deploy to NextLayer, use one of these methods:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "1. **Use NextLayer MCP tools in Cursor/Claude:**" >> $GITHUB_STEP_SUMMARY
+          echo "   - Ask your AI assistant to deploy using the \`nexlayer.yaml\` file" >> $GITHUB_STEP_SUMMARY
+          echo "   - The image is ready at: \`${{ steps.deploy.outputs.image }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "2. **Deploy via NextLayer dashboard:**" >> $GITHUB_STEP_SUMMARY
+          echo "   - Visit: https://nexlayer.com/dashboard" >> $GITHUB_STEP_SUMMARY
+          echo "   - Use the \`nexlayer.yaml\` file from this repository" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
 
-      - name: Comment deployment URL on commit (if PR)
-        if: github.event_name == 'pull_request' && steps.deploy.outputs.deployment_url != ''
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `🚀 **NextLayer Deployment Complete!**\n\n🌐 **Live URL:** ${{ steps.deploy.outputs.deployment_url }}\n\nThis deployment was triggered automatically from commit ${{ github.sha }}`
-            })
-
-      - name: Output deployment URL
-        if: steps.deploy.outputs.deployment_url != ''
+      - name: Output deployment info
         run: |
           echo "=========================================="
-          echo "🎉 NextLayer Deployment Complete!"
+          echo "🎉 NextLayer Deployment Ready!"
           echo "=========================================="
           echo ""
-          echo "🌐 Your app is live at:"
-          echo "${{ steps.deploy.outputs.deployment_url }}"
+          echo "📦 Docker Image:"
+          echo "${{ steps.deploy.outputs.image }}"
           echo ""
+          echo "📋 Configuration: nexlayer.yaml"
+          echo ""
+          echo "💡 Deploy using NextLayer MCP tools or dashboard"
           echo "=========================================="
-

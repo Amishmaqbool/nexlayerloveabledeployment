@@ -1,0 +1,8 @@
+application:
+  name: abbottabad-wall-art
+  pods:
+    - name: web
+      image: ghcr.io/hamidabbass/abbottabad-wall-masterpiece:latest
+      path: /
+      servicePorts: [80]
+
