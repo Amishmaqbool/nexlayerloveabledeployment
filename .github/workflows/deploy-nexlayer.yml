@@ -100,9 +100,9 @@ jobs:
           retention-days: 90
 
       - name: Store deployment URL in repository variable (via API)
-        if: steps.deploy.outputs.deployment_url != '' && secrets.GITHUB_TOKEN != ''
+        if: steps.deploy.outputs.deployment_url != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment_url }}
         run: |
           # Store as repository variable for easy access
