@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to retrieve the latest NextLayer deployment URL from GitHub Actions
+# Script to retrieve the latest Nexlayer deployment URL from GitHub Actions
 # This can be used in Lovable/Replit to fetch the deployment URL
 #
 # Usage:
@@ -22,7 +22,7 @@ if [ -z "$GITHUB_TOKEN" ]; then
   exit 1
 fi
 
-echo "🔍 Fetching latest NextLayer deployment URL..."
+echo "🔍 Fetching latest Nexlayer deployment URL..."
 echo ""
 
 # Get the latest successful workflow run

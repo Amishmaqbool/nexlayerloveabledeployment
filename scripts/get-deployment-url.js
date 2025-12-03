@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Script to retrieve the latest NextLayer deployment URL from GitHub Actions
+ * Script to retrieve the latest Nexlayer deployment URL from GitHub Actions
  * This can be used in Lovable/Replit to fetch the deployment URL
  * 
  * Usage:
@@ -54,7 +54,7 @@ async function getLatestDeploymentURL() {
       headers: {
         'Authorization': `token ${GITHUB_TOKEN}`,
         'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'NextLayer-Deployment-URL-Fetcher'
+        'User-Agent': 'Nexlayer-Deployment-URL-Fetcher'
       }
     };
 
@@ -83,7 +83,7 @@ async function getLatestDeploymentURL() {
       headers: {
         'Authorization': `token ${GITHUB_TOKEN}`,
         'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'NextLayer-Deployment-URL-Fetcher'
+        'User-Agent': 'Nexlayer-Deployment-URL-Fetcher'
       }
     };
 
@@ -111,7 +111,7 @@ async function getLatestDeploymentURL() {
       headers: {
         'Authorization': `token ${GITHUB_TOKEN}`,
         'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'NextLayer-Deployment-URL-Fetcher'
+        'User-Agent': 'Nexlayer-Deployment-URL-Fetcher'
       }
     };
 
@@ -142,7 +142,7 @@ async function getLatestDeploymentURL() {
 // This would require the workflow to write it somewhere accessible
 
 async function main() {
-  console.log('🔍 Fetching latest NextLayer deployment URL...\n');
+  console.log('🔍 Fetching latest Nexlayer deployment URL...\n');
   const result = await getLatestDeploymentURL();
   
   if (result) {

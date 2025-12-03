@@ -1,4 +1,4 @@
-# ✅ NextLayer Auto-Deployment Setup Complete!
+# ✅ Nexlayer Auto-Deployment Setup Complete!
 
 ## What Was Created
 
@@ -7,7 +7,7 @@
 
 This workflow automatically:
 - ✅ Builds your project when you push to `main`
-- ✅ Deploys to NextLayer
+- ✅ Deploys to Nexlayer
 - ✅ Extracts and stores the deployment URL
 - ✅ Creates a deployment summary in GitHub Actions
 - ✅ Stores the URL as an artifact and repository variable
@@ -15,7 +15,7 @@ This workflow automatically:
 ### 2. DeploymentStatus Component
 **File:** `src/components/DeploymentStatus.tsx`
 
-A React component that displays your NextLayer deployment URL directly in Lovable/Replit. This is the **"game changer"** feature that lets you see your production URL without leaving your development environment.
+A React component that displays your Nexlayer deployment URL directly in Lovable/Replit. This is the **"game changer"** feature that lets you see your production URL without leaving your development environment.
 
 ### 3. Helper Scripts
 **Files:**
@@ -36,13 +36,13 @@ A React component that displays your NextLayer deployment URL directly in Lovabl
 3. Click **New repository secret**
 4. Add:
    - **Name:** `NEXLAYER_MCP_TOKEN`
-   - **Value:** Your NextLayer MCP API token
+   - **Value:** Your Nexlayer MCP API token
 
 ### 2. Test the Deployment
 
 Push a change to the `main` branch (or make a change in Lovable/Replit that auto-commits), then:
 1. Go to GitHub → **Actions** tab
-2. Watch the "Deploy to NextLayer" workflow run
+2. Watch the "Deploy to Nexlayer" workflow run
 3. Once complete, check the workflow summary for your deployment URL
 
 ### 3. Display URL in Lovable/Replit (Optional but Recommended)
@@ -89,13 +89,13 @@ import DeploymentStatus from '@/components/DeploymentStatus';
 │  Workflow           │
 │  - Builds project   │
 │  - Deploys to       │
-│    NextLayer        │
+│    Nexlayer        │
 └──────────┬──────────┘
            │
            │ Returns URL
            ▼
 ┌─────────────────────┐
-│  NextLayer          │
+│  Nexlayer          │
 │  Production URL     │
 │  (Visible in app!)  │
 └─────────────────────┘
@@ -104,7 +104,7 @@ import DeploymentStatus from '@/components/DeploymentStatus';
 ## Features
 
 ✅ **Automatic Deployment** - Every push to `main` triggers deployment  
-✅ **URL Extraction** - Automatically extracts deployment URL from NextLayer response  
+✅ **URL Extraction** - Automatically extracts deployment URL from Nexlayer response  
 ✅ **Multiple Access Methods** - View URL in GitHub Actions, component, or scripts  
 ✅ **Artifact Storage** - URL stored as GitHub artifact for 90 days  
 ✅ **Repository Variable** - URL stored as repo variable (if permissions allow)  
@@ -126,14 +126,14 @@ import DeploymentStatus from '@/components/DeploymentStatus';
 If deployment fails:
 1. Check GitHub Actions logs for detailed error messages
 2. Verify `NEXLAYER_MCP_TOKEN` is correct
-3. Check NextLayer dashboard for deployment status
+3. Check Nexlayer dashboard for deployment status
 4. Review `DEPLOYMENT_SETUP.md` for detailed troubleshooting
 
 ## Success Criteria
 
 ✅ You can code in Lovable/Replit  
 ✅ Changes auto-commit to GitHub  
-✅ GitHub Actions automatically deploys to NextLayer  
+✅ GitHub Actions automatically deploys to Nexlayer  
 ✅ You can see the deployment URL in your app (via DeploymentStatus component)  
 ✅ You never need to leave Lovable/Replit!  
 

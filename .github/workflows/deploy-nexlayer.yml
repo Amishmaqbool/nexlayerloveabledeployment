@@ -1,4 +1,4 @@
-name: Deploy to NextLayer
+name: Deploy to Nexlayer
 
 on:
   push:
@@ -41,18 +41,20 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ github.actor }}/abbottabad-wall-masterpiece:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Prepare NextLayer deployment info
+      - name: Prepare Nexlayer deployment info
         id: deploy
         run: |
-          IMAGE_NAME="ghcr.io/${{ github.repository }}:latest"
+          IMAGE_NAME="ghcr.io/${{ github.actor }}/abbottabad-wall-masterpiece:latest"
           echo "🚀 Docker image built and pushed!"
           echo "📦 Image: $IMAGE_NAME"
           echo ""
-          echo "📋 NextLayer YAML configuration:"
+          # Update nexlayer.yaml with the correct image name
+          sed -i "s|image:.*|image: $IMAGE_NAME|" nexlayer.yaml
+          echo "📋 Nexlayer YAML configuration:"
           cat nexlayer.yaml
           echo ""
           echo "image=$IMAGE_NAME" >> $GITHUB_OUTPUT
@@ -60,7 +62,7 @@ jobs:
 
       - name: Create deployment summary
         run: |
-          echo "## 🚀 NextLayer Deployment Ready" >> $GITHUB_STEP_SUMMARY
+          echo "## 🚀 Nexlayer Deployment Ready" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "✅ **Docker image built and pushed!**" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -68,13 +70,13 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 📋 Next Steps:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "To deploy to NextLayer, use one of these methods:" >> $GITHUB_STEP_SUMMARY
+          echo "To deploy to Nexlayer, use one of these methods:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "1. **Use NextLayer MCP tools in Cursor/Claude:**" >> $GITHUB_STEP_SUMMARY
+          echo "1. **Use Nexlayer MCP tools in Cursor/Claude:**" >> $GITHUB_STEP_SUMMARY
           echo "   - Ask your AI assistant to deploy using the \`nexlayer.yaml\` file" >> $GITHUB_STEP_SUMMARY
           echo "   - The image is ready at: \`${{ steps.deploy.outputs.image }}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "2. **Deploy via NextLayer dashboard:**" >> $GITHUB_STEP_SUMMARY
+          echo "2. **Deploy via Nexlayer dashboard:**" >> $GITHUB_STEP_SUMMARY
           echo "   - Visit: https://nexlayer.com/dashboard" >> $GITHUB_STEP_SUMMARY
           echo "   - Use the \`nexlayer.yaml\` file from this repository" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -84,7 +86,7 @@ jobs:
       - name: Output deployment info
         run: |
           echo "=========================================="
-          echo "🎉 NextLayer Deployment Ready!"
+          echo "🎉 Nexlayer Deployment Ready!"
           echo "=========================================="
           echo ""
           echo "📦 Docker Image:"
@@ -92,5 +94,5 @@ jobs:
           echo ""
           echo "📋 Configuration: nexlayer.yaml"
           echo ""
-          echo "💡 Deploy using NextLayer MCP tools or dashboard"
+          echo "💡 Deploy using Nexlayer MCP tools or dashboard"
           echo "=========================================="

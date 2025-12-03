@@ -1,4 +1,4 @@
-# 🚀 Next Steps - Get Your NextLayer Deployment Working
+# 🚀 Next Steps - Get Your Nexlayer Deployment Working
 
 ## Step 1: Push to GitHub ✅ (Ready to do)
 
@@ -17,7 +17,7 @@ Or if you prefer to review first, you can check what will be pushed.
 2. Click **"New repository secret"**
 3. Add:
    - **Name:** `NEXLAYER_MCP_TOKEN`
-   - **Value:** Your NextLayer MCP API token
+   - **Value:** Your Nexlayer MCP API token
      - Get it from: https://nexlayer.com (your account settings/dashboard)
 4. Click **"Add secret"**
 
@@ -27,7 +27,7 @@ After pushing and setting the secret:
 
 1. **Make a small change** (or the push itself will trigger it)
 2. Go to: https://github.com/hamidabbass/abbottabad-wall-masterpiece/actions
-3. You should see **"Deploy to NextLayer"** workflow running
+3. You should see **"Deploy to Nexlayer"** workflow running
 4. Once complete, click on it to see your deployment URL!
 
 ## Step 4: Display URL in Lovable/Replit (Optional but Recommended)
@@ -67,7 +67,7 @@ git push origin main
 1. ✅ You push to `main`
 2. ✅ GitHub Actions automatically runs
 3. ✅ Your project builds
-4. ✅ Deploys to NextLayer
+4. ✅ Deploys to Nexlayer
 5. ✅ You get a production URL
 6. ✅ URL appears in GitHub Actions summary
 7. ✅ (If configured) URL appears in your app via DeploymentStatus component

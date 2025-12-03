@@ -13,7 +13,7 @@ interface DeploymentInfo {
 }
 
 /**
- * Component to display NextLayer deployment status and URL
+ * Component to display Nexlayer deployment status and URL
  * This can be used in Lovable/Replit to show the production deployment URL
  * 
  * To use this component:
@@ -103,7 +103,7 @@ export default function DeploymentStatus() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>NextLayer Deployment Status</CardTitle>
+          <CardTitle>Nexlayer Deployment Status</CardTitle>
           <CardDescription>Checking deployment status...</CardDescription>
         </CardHeader>
         <CardContent>
@@ -119,7 +119,7 @@ export default function DeploymentStatus() {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>NextLayer Deployment Status</CardTitle>
+          <CardTitle>Nexlayer Deployment Status</CardTitle>
           <CardDescription>Deployment information</CardDescription>
         </CardHeader>
         <CardContent>
@@ -141,7 +141,7 @@ export default function DeploymentStatus() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <CheckCircle2 className="h-5 w-5 text-green-500" />
-          NextLayer Deployment Status
+            Nexlayer Deployment Status
         </CardTitle>
         <CardDescription>Your production deployment information</CardDescription>
       </CardHeader>

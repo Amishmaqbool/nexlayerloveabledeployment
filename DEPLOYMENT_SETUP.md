@@ -1,12 +1,12 @@
-# 🚀 NextLayer Auto-Deployment Setup Guide
+# 🚀 Nexlayer Auto-Deployment Setup Guide
 
-This guide will help you set up automatic deployment from Lovable/Replit to NextLayer.
+This guide will help you set up automatic deployment from Lovable/Replit to Nexlayer.
 
 ## Quick Setup (5 minutes)
 
-### Step 1: Get Your NextLayer Token
+### Step 1: Get Your Nexlayer Token
 
-1. Go to [NextLayer Dashboard](https://nexlayer.com)
+1. Go to [Nexlayer Dashboard](https://nexlayer.com)
 2. Navigate to your account settings
 3. Generate or copy your MCP API token
 
@@ -17,7 +17,7 @@ This guide will help you set up automatic deployment from Lovable/Replit to Next
 3. Click **New repository secret**
 4. Add:
    - **Name:** `NEXLAYER_MCP_TOKEN`
-   - **Value:** Your NextLayer MCP token
+   - **Value:** Your Nexlayer MCP token
 5. Click **Add secret**
 
 ### Step 3: Test the Deployment
@@ -104,7 +104,7 @@ node scripts/get-deployment-url.js <GITHUB_TOKEN> <OWNER> <REPO>
          │ Builds & Deploys
          ▼
 ┌─────────────────┐
-│  NextLayer      │
+│  Nexlayer      │
 │  Production     │
 └─────────────────┘
 ```
@@ -123,16 +123,16 @@ node scripts/get-deployment-url.js <GITHUB_TOKEN> <OWNER> <REPO>
 - Solution: Make sure you've added the secret in GitHub Settings → Secrets → Actions
 
 **Error: "Deployment failed with HTTP code 401"**
-- Solution: Your NextLayer token is invalid or expired. Get a new one from NextLayer dashboard.
+- Solution: Your Nexlayer token is invalid or expired. Get a new one from Nexlayer dashboard.
 
 **Error: "Deployment failed with HTTP code 404"**
-- Solution: Check that the NextLayer API endpoint is correct and your account has access.
+- Solution: Check that the Nexlayer API endpoint is correct and your account has access.
 
 ### URL Not Showing
 
 **The deployment succeeds but no URL appears:**
 - Check the workflow logs for the full response
-- Visit NextLayer dashboard to find your deployment
+- Visit Nexlayer dashboard to find your deployment
 - The URL might be in the response body but in a different format
 
 **Component shows "No successful deployments found":**
@@ -144,14 +144,14 @@ node scripts/get-deployment-url.js <GITHUB_TOKEN> <OWNER> <REPO>
 
 Once set up, you can:
 - ✅ Code in Lovable/Replit without leaving
-- ✅ Automatically deploy to NextLayer on every push
+- ✅ Automatically deploy to Nexlayer on every push
 - ✅ See your production URL directly in your app
 - ✅ Stay in your development flow
 
 ## 📚 Additional Resources
 
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [NextLayer Documentation](https://nexlayer.com/docs)
+- [Nexlayer Documentation](https://nexlayer.com/docs)
 - [Lovable Git Integration](https://docs.lovable.dev/integrations/git-integration)
 - [Replit GitHub Integration](https://docs.replit.com/getting-started/git)
 
@@ -165,7 +165,7 @@ Once set up, you can:
 ## 🚀 Next Steps
 
 After your first successful deployment:
-1. Bookmark your NextLayer URL
+1. Bookmark your Nexlayer URL
 2. Share it with your team
 3. Set up custom domain (if needed)
 4. Continue coding in Lovable/Replit! 🎨

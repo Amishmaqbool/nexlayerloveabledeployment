@@ -72,12 +72,12 @@ To connect a domain, navigate to Project > Settings > Domains and click Connect 
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
 
-## 🚀 Automatic Deployment to NextLayer
+## 🚀 Automatic Deployment to Nexlayer
 
-This project is configured with **automatic deployment to NextLayer** whenever you push changes to the `main` branch. This allows you to:
+This project is configured with **automatic deployment to Nexlayer** whenever you push changes to the `main` branch. This allows you to:
 
 - **Code in Lovable/Replit** (dev/test environment)
-- **Automatically deploy to NextLayer** (production environment)
+- **Automatically deploy to Nexlayer** (production environment)
 - **Stay in your flow** without leaving Lovable/Replit
 
 ### Setup Instructions
@@ -89,19 +89,19 @@ This project is configured with **automatic deployment to NextLayer** whenever y
 3. Click **New repository secret**
 4. Add the following secret:
    - **Name:** `NEXLAYER_MCP_TOKEN`
-   - **Value:** Your NextLayer MCP API token (get it from [NextLayer Dashboard](https://nexlayer.com))
+   - **Value:** Your Nexlayer MCP API token (get it from [Nexlayer Dashboard](https://nexlayer.com))
 
 #### 2. How It Works
 
 - **When you code in Lovable/Replit:** Changes are automatically committed to GitHub
 - **When you push to `main`:** GitHub Actions automatically:
   1. Builds your project
-  2. Deploys to NextLayer
+  2. Deploys to Nexlayer
   3. Provides you with a production URL
 
 #### 3. Viewing Your Deployment URL
 
-After a successful deployment, you can find your NextLayer URL in several ways:
+After a successful deployment, you can find your Nexlayer URL in several ways:
 
 **Option A: GitHub Actions Workflow**
 - Go to the **Actions** tab in your GitHub repository
@@ -141,13 +141,13 @@ The workflow automatically stores the deployment URL as a repository variable `N
 
 You can also manually trigger a deployment:
 1. Go to **Actions** tab in GitHub
-2. Select **Deploy to NextLayer** workflow
+2. Select **Deploy to Nexlayer** workflow
 3. Click **Run workflow** → **Run workflow**
 
 ### Troubleshooting
 
 - **Deployment fails:** Check that `NEXLAYER_MCP_TOKEN` is correctly set in GitHub Secrets
-- **URL not showing:** Check the workflow logs for the deployment URL, or visit the NextLayer dashboard
+- **URL not showing:** Check the workflow logs for the deployment URL, or visit the Nexlayer dashboard
 - **Component not working:** Ensure environment variables are set correctly in Lovable/Replit project settings
 
 ### Workflow Details
@@ -157,12 +157,12 @@ The GitHub Action workflow (`.github/workflows/deploy-nexlayer.yml`) does the fo
 2. ✅ Sets up Node.js
 3. ✅ Installs dependencies
 4. ✅ Builds your project
-5. ✅ Deploys to NextLayer
+5. ✅ Deploys to Nexlayer
 6. ✅ Stores and displays the deployment URL
 
 ### Next Steps
 
 Once set up, you can:
 - Continue coding in Lovable/Replit as usual
-- Every push to `main` automatically deploys to NextLayer
+- Every push to `main` automatically deploys to Nexlayer
 - View your production URL directly in Lovable/Replit using the `DeploymentStatus` component
