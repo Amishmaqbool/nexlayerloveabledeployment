@@ -66,8 +66,8 @@ export default function Preloader() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <h2 className="font-display text-2xl font-bold text-foreground mb-2">
-                Abbottabad <span className="gradient-text">Wall Art</span>
+              <h2 className="font-display text-2xl font-bold gradient-text mb-2">
+                Wall Art
               </h2>
               <p className="text-muted-foreground text-sm">Loading your experience...</p>
             </motion.div>
