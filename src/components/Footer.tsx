@@ -37,12 +37,9 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <a href="#" className="flex items-center gap-2 mb-6">
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">A</span>
+                <span className="text-primary-foreground font-bold text-xl">W</span>
               </div>
-              <div>
-                <span className="font-display text-lg font-bold text-foreground">Abbottabad</span>
-                <span className="font-display text-lg font-bold gradient-text"> Wall Art</span>
-              </div>
+              <span className="font-display text-lg font-bold gradient-text">Wall Art</span>
             </a>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Transforming walls across Pakistan with cutting-edge UV printing technology.
@@ -112,8 +109,8 @@ export default function Footer() {
               </p>
               <p>
                 <span className="text-foreground">Email:</span>{' '}
-                <a href="mailto:hello@abbottabadwallart.com" className="hover:text-primary transition-colors">
-                  hello@abbottabadwallart.com
+                <a href="mailto:hello@wallart.pk" className="hover:text-primary transition-colors">
+                  hello@wallart.pk
                 </a>
               </p>
             </div>
@@ -123,10 +120,10 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Abbottabad Wall Art. All rights reserved.
+            © {new Date().getFullYear()} Wall Art. All rights reserved.
           </p>
           <p className="text-muted-foreground text-sm flex items-center gap-1">
-            Made with <Heart className="w-4 h-4 text-destructive fill-destructive" /> in Abbottabad
+            Made with <Heart className="w-4 h-4 text-destructive fill-destructive" /> in Pakistan
           </p>
         </div>
       </div>

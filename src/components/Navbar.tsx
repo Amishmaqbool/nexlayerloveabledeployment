@@ -38,11 +38,10 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">A</span>
+              <span className="text-primary-foreground font-bold text-xl">W</span>
             </div>
             <div className="hidden sm:block">
-              <span className="font-display text-xl font-bold text-foreground">Abbottabad</span>
-              <span className="font-display text-xl font-bold gradient-text"> Wall Art</span>
+              <span className="font-display text-xl font-bold gradient-text">Wall Art</span>
             </div>
           </a>
 
