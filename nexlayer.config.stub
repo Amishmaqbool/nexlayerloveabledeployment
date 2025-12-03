@@ -1,0 +1,6 @@
+# Nexlayer deployment configuration hint
+engine: nexlayer
+
+# Lovable/Replit agents will detect this and generate the full nexlayer.yaml
+# This file serves as a hint to trigger automatic YAML scaffolding
+

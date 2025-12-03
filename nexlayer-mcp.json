@@ -1,0 +1,37 @@
+{
+  "name": "nexlayer",
+  "version": "1.0.0",
+  "description": "MCP tool for deploying and managing applications on Nexlayer",
+  "tools": [
+    {
+      "name": "deploy",
+      "description": "Deploy the current project to Nexlayer",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string"
+          },
+          "env": {
+            "type": "string"
+          }
+        },
+        "required": ["service"]
+      }
+    },
+    {
+      "name": "logs",
+      "description": "Fetch logs from a Nexlayer deployment",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string"
+          }
+        },
+        "required": ["service"]
+      }
+    }
+  ]
+}
+

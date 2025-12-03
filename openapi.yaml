@@ -1,0 +1,94 @@
+openapi: 3.0.1
+info:
+  title: Nexlayer Deployment API
+  version: 1.0.0
+  description: API for deploying and managing applications on Nexlayer platform
+paths:
+  /deploy:
+    post:
+      summary: Deploy a service to Nexlayer
+      operationId: deployService
+      description: Deploys the current project to Nexlayer using the nexlayer.yaml configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                service:
+                  type: string
+                  description: Service name to deploy
+                env:
+                  type: string
+                  description: Environment (production, staging, etc.)
+                yaml:
+                  type: string
+                  description: Nexlayer YAML configuration
+      responses:
+        '200':
+          description: Deployment started successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deployment_url:
+                    type: string
+                    description: URL of the deployed application
+                  status:
+                    type: string
+        '400':
+          description: Invalid deployment configuration
+        '401':
+          description: Authentication required
+  /logs:
+    get:
+      summary: Fetch deployment logs
+      operationId: fetchLogs
+      description: Retrieve logs from a Nexlayer deployment
+      parameters:
+        - name: service
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Service name to fetch logs for
+      responses:
+        '200':
+          description: Logs retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logs:
+                    type: array
+                    items:
+                      type: string
+  /status:
+    get:
+      summary: Get deployment status
+      operationId: getStatus
+      description: Check the status of a deployment
+      parameters:
+        - name: service
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deployment status retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [deployed, deploying, failed, stopped]
+                  url:
+                    type: string
+                    description: Deployment URL if available
+

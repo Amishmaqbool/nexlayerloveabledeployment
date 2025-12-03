@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Nexlayer Deployment",
+  "name_for_model": "nexlayer",
+  "description_for_human": "Deploy and manage your applications using Nexlayer.",
+  "description_for_model": "Tools for deploying, managing, and retrieving application info from the Nexlayer platform.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "/openapi.yaml"
+  },
+  "logo_url": "https://nexlayer.com/logo.png",
+  "contact_email": "support@nexlayer.com",
+  "legal_info_url": "https://nexlayer.com/legal"
+}
+
